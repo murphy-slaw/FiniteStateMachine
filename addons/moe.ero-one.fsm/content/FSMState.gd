@@ -1,6 +1,6 @@
 extends Node;
 
-var logicRoot;
+var logic_root;
 var fsm;
 
 func state_init(args=null): pass

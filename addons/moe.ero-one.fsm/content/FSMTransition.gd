@@ -14,7 +14,7 @@ export (float) var intervalBetweenChecks = -1.0; #in seconds, -1 mean disable
 #export (Vector2) var devGraphPos = Vector2(0,0); #position in editor tool graph
 
 onready var fsm;
-onready var logicRoot;
+onready var logic_root;
 #onready var sourceStateNodes = []
 onready var target_stateNode;
 
@@ -39,7 +39,7 @@ func initSourceStates():
 	if(!is_inside_tree()): return;
 	if(!Engine.is_editor_hint()):
 		fsm = get_parent().get_parent();
-		logicRoot = fsm.get_logic_root();
+		logic_root = fsm.get_logic_root();
 	refreshSourceNodes();
 	refreshTargetNodeFromPath();
 

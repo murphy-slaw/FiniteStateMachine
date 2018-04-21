@@ -160,7 +160,7 @@ func init(args = null):
 			states[children_state.get_name()] = children_state;
 			STATE[children_state.get_name()] = children_state.get_name();
 			if(!Engine.is_editor_hint()):
-				children_state.logicRoot = get_node(logic_root_path);
+				children_state.logic_root = get_node(logic_root_path);
 				children_state.fsm = self;
 				children_state.stateInit(args);
 
@@ -528,7 +528,7 @@ func createElement(inElementName, inHolderNode, inElementsSubfolder, inTemplateS
 		var script_file = File.new();
 		script_file.open(scriptFilePath, File.WRITE);
 		var script_text = load(inTemplateScriptPath).get_source_code()
-		
+
 		if script_parent:
 			var script_text_split = script_text.split("\n")
 			for i in range(script_text_split.size()):
@@ -537,8 +537,8 @@ func createElement(inElementName, inHolderNode, inElementsSubfolder, inTemplateS
 					script_text_split[i] = "extends \"%s\"" % [script_parent]
 					script_text = PoolStringArray(script_text_split).join("\n")
 					break;
-					
-		
+
+
 		script_file.store_string(script_text);
 		script_file.close();
 		script = load(scriptFilePath);
