@@ -101,9 +101,9 @@ func check(inDeltaTime, inParam0=null, inParam1=null, inParam2=null, inParam3=nu
 		if(transAccomplished): return true;
 		return transitionCondition(inDeltaTime, inParam0, inParam1, inParam2, inParam3, inParam4);
 
-func prepareTransition(inNewStateID, inArg0 = null, inArg1 = null, inArg3 = null):
+func prepareTransition(inNewStateID, args=null):
 	transAccomplished = false;
-	return prepare(inNewStateID, inArg0, inArg1, inArg3);
+	return prepare(inNewStateID, args);
 
 #####
 ## Signals
@@ -114,7 +114,7 @@ func storeIncomingSignals():
 		incomingSignals.append(SignalData.new(connection.source, connection.signal_name, connection.method_name));
 		connection.source.disconnect(connection.signal_name, self, connection.method_name);
 
-func restoreIncomingSignals():
+func restore_incoming_signals():
 	for storedSignal in incomingSignals:
 		if(!storedSignal.signalSourceRef.get_ref()): continue;
 		storedSignal.signalSourceRef.get_ref().connect(storedSignal.signalName, self, storedSignal.targetFuncName);

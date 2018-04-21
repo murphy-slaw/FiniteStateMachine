@@ -21,7 +21,7 @@ func storeIncomingSignals():
 		incomingSignals.append(SignalData.new(connection.source, connection.signal_name, connection.method_name));
 		connection.source.disconnect(connection.signal_name, self, connection.method_name);
 
-func restoreIncomingSignals():
+func restore_incoming_signals():
 	for storedSignal in incomingSignals:
 		if(!storedSignal.signalSourceRef.get_ref()): continue;
 		storedSignal.signalSourceRef.get_ref().connect(storedSignal.signalName, self, storedSignal.targetFuncName);

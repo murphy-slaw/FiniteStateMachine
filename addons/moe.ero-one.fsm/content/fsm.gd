@@ -162,7 +162,7 @@ func init(args = null):
 			if(!Engine.is_editor_hint()):
 				children_state.logic_root = get_node(logic_root_path);
 				children_state.fsm = self;
-				children_state.stateInit(args);
+				children_state.state_init(args);
 
 	#
 	initTransitions(args);
@@ -210,8 +210,8 @@ func initTransitions(args):
 	for state in states_node.get_children(): #ensure even states without transitions are here
 		state_transitions_map[state.get_name()] = [];
 
-	var transitions = transitions_node.get_children()
-	for transition in transitions:
+	var scene_transitions = transitions_node.get_children()
+	for transition in scene_transitions:
 		TRANSITION[transition.get_name()] = transition.get_name();
 		transition.manualInit(args);
 		transitions[transition.get_name()] = transition;
@@ -313,7 +313,7 @@ func set_state(in_state_ID, args = null):
 	#
 	emit_signal("state_changed", current_state_ID, previous_state_ID);
 
-func ensure_transitions_for_state_are_ready(in_state_ID, args):
+func ensure_transitions_for_state_are_ready(in_state_ID, args=null):
 	if(!state_transitions_map.has(in_state_ID)): return;
 	var new_transitions = state_transitions_map[in_state_ID];
 	for new_transition in new_transitions:
