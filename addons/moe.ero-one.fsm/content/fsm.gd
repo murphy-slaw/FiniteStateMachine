@@ -72,7 +72,7 @@ var fsm_spatial_debugger_scene = preload("res://addons/moe.ero-one.fsm/content/F
 ##################################################################################
 #########                       Signals definitions                      #########
 ##################################################################################
-signal stateChanged(newStateID, oldStateID);
+signal state_changed(newStateID, oldStateID);
 
 ##################################################################################
 #####  Variables (Constants, Export Variables, Node Vars, Normal variables)  #####
@@ -117,9 +117,10 @@ var last_transition_id = null;
 #########                          Init code                             #########
 ##################################################################################
 func _ready():
-	set_process(false);
-	set_physics_process(false);
-
+	set_process(false)
+	set_physics_process(false)
+	set_process_input(true)
+	set_process_unhandled_input(true)
 	toolInit();
 	add_to_group("FSM");
 	if(init_manually):
@@ -423,17 +424,40 @@ func update(delta, args = null):
 	assert((typeof(next_state_ID)==TYPE_STRING));  #ERROR: current_state.computeNextState() is not returning String!" Take a look at current_state_ID variable in debugger
 	if(next_state_ID!=current_state_ID):
 		set_state(next_state_ID);
+		
 
 	state_time += delta;
 	return current_state.update(delta, args);
+	
+func _input(event, args = null):
+	if current_state.has_method("input"):
+		return current_state.input(event)
+		
+	var relatedTransitions = state_transitions_map[current_state_ID]
+	for transition in relatedTransitions:
+		if transition.has_method("input"):
+			transition.input(event)
+	
+func _unhandled_input(event, args = null):
+	if current_state.has_method("unhandled_input"):
+		return current_state.unhandled_input(event)
+	
+	var relatedTransitions = state_transitions_map[current_state_ID]
+	for transition in relatedTransitions:
+		if transition.has_method("unhandled_input"):
+			transition.unhandled_input(event)
 
 #############
 ### Transitions check
 func checkTransitionsAndGetNextStateID(inDeltaTime, args = null): #work
-	if(!state_transitions_map.has(current_state_ID)): return current_state_ID;
+
+	if(!state_transitions_map.has(current_state_ID)):
+		return current_state_ID;
+
 	var relatedTransitions = state_transitions_map[current_state_ID];
+	
 	for transition in relatedTransitions:
-		if(!transitionReady2BeChecked(inDeltaTime, transition)): continue;
+		
 		if(transition.check(inDeltaTime, args)):
 			last_transition_id = transition.get_name();
 			return transition.getTarget_state_id();

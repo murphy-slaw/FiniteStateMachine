@@ -14,7 +14,7 @@ func computeNextState():
 ######### INTERNAL/PRIVATE PART ########
 var incomingSignals = [];
 
-func storeIncomingSignals():
+func store_incoming_signals():
 	incomingSignals.clear();
 	var incomingConnections = get_incoming_connections();
 	for connection in incomingConnections:

@@ -96,10 +96,10 @@ func fixCommonProblems():
 		if(getTargetFSMState()==self):
 			clearTarget_stateNode();
 
-func check(inDeltaTime, inParam0=null, inParam1=null, inParam2=null, inParam3=null, inParam4=null):
+func check(inDeltaTime, args=null):
 	if !Engine.is_editor_hint():
 		if(transAccomplished): return true;
-		return transitionCondition(inDeltaTime, inParam0, inParam1, inParam2, inParam3, inParam4);
+		return transition_condition(inDeltaTime, args)
 
 func prepareTransition(inNewStateID, args=null):
 	transAccomplished = false;
@@ -107,7 +107,7 @@ func prepareTransition(inNewStateID, args=null):
 
 #####
 ## Signals
-func storeIncomingSignals():
+func store_incoming_signals():
 	incomingSignals.clear();
 	var incomingConnections = get_incoming_connections();
 	for connection in incomingConnections:
@@ -131,7 +131,7 @@ func getTarget_state_id():
 ####### Implement those below ########
 func transitionInit(inParam1=null, inParam2=null, inParam3=null, inParam4=null, inParam5=null): pass
 func prepare(inNewStateID, inArg0 = null, inArg1 = null, inArg2 = null): pass
-func transitionCondition(inDeltaTime, inParam0=null, inParam1=null, inParam2=null, inParam3=null, inParam4=null): #optional params. They exist if you have pushed them in update
+func transition_condition(inDeltaTime, args=null): #optional params. They exist if you have pushed them in update
 	#IMPLEMENT CHECK LOGIC HERE
 	return false;
 
