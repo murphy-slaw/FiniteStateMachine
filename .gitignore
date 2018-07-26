@@ -2,6 +2,7 @@
 .import/
 export.cfg
 .fscache
+*.import
 
 # System/tool-specific ignores
 .directory
