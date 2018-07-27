@@ -97,7 +97,7 @@ export (NodePath) var logic_root_path = NodePath("..");
 export (bool) var only_active_state_on_scene = false setget set_only_active_state_on_scene;
 export (bool) var init_manually = false;
 export (int, "Manual", "Process", "Fixed") var update_mode = UPDATE_MODE_PROCESS;
-export (bool) var receive_singals_only_on_activated_items = true;
+export (bool) var receive_signals_only_on_activated_items = true;
 export (bool) var debug_enabled = false;
 
 var state_transitions_map = {};
@@ -281,7 +281,7 @@ func set_state(in_state_ID, args = null):
     archive_state_in_history(previous_state_ID)
 
     #
-    if(receive_singals_only_on_activated_items):
+    if(receive_signals_only_on_activated_items):
         var incomingConnections = current_state.get_incoming_connections();
         for connection in incomingConnections:
             current_state.store_incoming_signals();
@@ -308,7 +308,7 @@ func set_state(in_state_ID, args = null):
     ensure_transitions_for_state_are_ready(in_state_ID, args);
     current_state.enter(previous_state_ID, last_transition_id, args);
 
-    if(receive_singals_only_on_activated_items):
+    if(receive_signals_only_on_activated_items):
         current_state.restore_incoming_signals();
 
     #
@@ -322,7 +322,7 @@ func ensure_transitions_for_state_are_ready(in_state_ID, args=null):
             transitions_node.add_child(new_transition);
         new_transition.prepareTransition(in_state_ID, args);
 
-        if(receive_singals_only_on_activated_items):
+        if(receive_signals_only_on_activated_items):
             new_transition.restore_incoming_signals();
 
 
