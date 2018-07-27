@@ -108,7 +108,7 @@ tracks/7/keys = {
 "values": [ 0.0 ]
 }
 
-[node name="FSMGraphUI" type="Popup" index="0"]
+[node name="FSMGraphUI" type="Popup"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -139,7 +139,7 @@ margin_top = 260.0
 margin_right = 630.0
 margin_bottom = 330.0
 mouse_filter = 2
-_sections_unfolded = [ "Mouse", "Rect", "Visibility" ]
+_sections_unfolded = [ "Mouse", "Rect", "Theme", "Visibility", "custom_styles" ]
 
 [node name="initSetup" type="AnimationPlayer" parent="." index="2"]
 
@@ -417,7 +417,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 60.0
+margin_right = 119.0
 margin_bottom = 20.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -442,7 +442,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 24.0
-margin_right = 60.0
+margin_right = 119.0
 margin_bottom = 44.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -466,9 +466,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 23.0
+margin_top = 48.0
 margin_right = 119.0
-margin_bottom = 43.0
+margin_bottom = 68.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
