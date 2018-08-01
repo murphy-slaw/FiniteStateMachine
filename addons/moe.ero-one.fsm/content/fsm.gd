@@ -232,7 +232,7 @@ func init_holder_nodes():
     if(has_node("States")):
         states_node = get_node("States");
     else:
-        states_node = createEmptyHolderNode();
+        states_node = Node.new();
         add_child(states_node);
         states_node.set_name("States");
         states_node.set_owner(get_tree().get_edited_scene_root());
@@ -240,21 +240,10 @@ func init_holder_nodes():
     if(has_node("Transitions")):
         transitions_node = get_node("Transitions");
     else:
-        transitions_node= createEmptyHolderNode();
+        transitions_node = Node.new()
         add_child(transitions_node);
         transitions_node.set_name("Transitions");
         transitions_node.set_owner(get_tree().get_edited_scene_root());
-
-# Returns a base node depending on what kind of node the FSM node itself is
-func createEmptyHolderNode():
-    if(self is Node2D):
-        return Node2D.new();
-    elif(self is Spatial):
-        return Spatial.new();
-    elif(self is Control):
-        return Control.new();
-    else:
-        return Node.new();
 
 
 ##################################################################################
